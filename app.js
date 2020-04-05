@@ -29,8 +29,8 @@ app.set('view engine', 'ejs');
 //     res.sendFile(path.join(__dirname, 'views/index.html'));
 // })
 
-const nav = [{ link: '/books', title: 'Book' },
-{ link: '/results', title: 'Result' }];
+const nav = [{ link: '/books', title: 'Books' },]
+//{ link: '/search', title: 'Result' }];
 
 const bookRouter = require('./src/routes/bookRoutes')(nav);
 const adminRouter = require('./src/routes/adminRoutes')(nav);
@@ -40,14 +40,14 @@ const searchRouter = require('./src/routes/searchRoutes')(nav);
 app.use('/books', bookRouter);
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
-app.use('/results', searchRouter);
+app.use('/search', searchRouter);
 
 app.get('/', (req, res) => {
     res.render(
         'signin',
         {
-            nav: [{ link: '/books', title: 'Books' },
-            { link: '/results', title: 'Results' }],
+            nav: [{ link: '/books', title: 'Books' }],
+            //{ link: '/search', title: 'Results' }],
             title: 'Lollykrown'
         });
 });

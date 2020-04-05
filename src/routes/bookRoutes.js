@@ -1,7 +1,7 @@
 const express = require('express');
 const bookRouter = express.Router();
 const bookController = require('../controllers/bookController');
-const bookService = require('../services/goodreadsService')
+const bookService = require('../services/goodreadsService');
 
 function router(nav) {
     const {middleware, getIndex, getById} = bookController(bookService, nav);
