@@ -13,7 +13,7 @@ function goodreadsService() {
                     if(err) {
                         debug(err);
                     } else {
-                        debug(result);
+                        //debug(result);
                         resolve(result.GoodreadsResponse.book);
                     }
                 })
@@ -33,7 +33,7 @@ function goodreadsService() {
                     if(err) {
                         debug(err);
                     } else {
-                        debug(result);
+                        //debug(result);
                         resolve(result.GoodreadsResponse.search.results.work);
                     }
                 })

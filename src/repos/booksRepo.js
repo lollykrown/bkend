@@ -1,5 +1,6 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const interns = require('./books');
+const debug = require('debug')('app:booksRepo');
 const url = 'mongodb://localhost:27017';
 const dbName = 'Library';
 
@@ -25,7 +26,8 @@ function booksRepo() {
   }
   function getBookById(id) {
     return new Promise(async (resolve, reject) => {
-      const client = new MongoClient(url);
+      const client = new MongoClient(url, {useUnifiedTopology: true});
+      debug(id);
       try {
         await client.connect();
         const db = client.db(dbName);

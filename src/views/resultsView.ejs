@@ -94,17 +94,19 @@
             <div class="row">
               <br>
               <div class="col-md-2 col-sm-3 text-center">
-                <a class="story-title" href="#"><img alt="" src="<%=bk[i].best_book.image_url%>"
+                <a class="story-title" href="/search/<%=Object.values(bk[i].best_book.id)[0]%>"><img alt="" src="<%=bk[i].best_book.image_url%>"
                     style="width:100px;height:100px"></a>
               </div>
               <div class="col-md-10 col-sm-9">
-                <h3><%=bk[i].best_book.title%></h3>
+                <a href="/search/<%=Object.values(bk[i].best_book.id)[0]%>" >
+                <h3><%=bk[i].best_book.title%></h3></a>
                 <div class="row">
                   <div class="col-xs-9">
-                    <h4><span class="label label-default"><%=bk[i].best_book.author.name%></span></h4>
+                    <h4><span class="label label-success"><%=bk[i].best_book.author.name%></span></h4>
                     <h4>
                       <small style="font-family:courier,'new courier';" class="text-muted">Ratings: <%=bk[i].average_rating%> •
-                        <a href="" class="text-muted"><%=bk[i].original_publication_year%></a></small>
+                        <%=Object.values(bk[i].original_publication_year)[0]%>
+                        <a href="/search/<%=Object.values(bk[i].best_book.id)[0]%>"><strong>Read More</strong></a></small>
                     </h4>
                   </div>
                   <div class="col-xs-3"></div>
