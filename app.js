@@ -6,10 +6,17 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const compression = require('compression');
+const helmet = require('helmet');
+const url = 'mongodb://localhost:27017';
+//const mongoDb = 'mongodb+srv://lollykrown:password@cluster0-mbdj7.mongodb.net/local_library?retryWrites=true';
 
 const app = express();
 const port = process.env.PORT || 3000;
+//const mongoDb= process.env.MONGODB_URI || url;
 
+app.use(compression());
+app.use(helmet());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));

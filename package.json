@@ -1,6 +1,9 @@
 {
   "name": "webapp",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.1"
+  },
   "description": "web app with express",
   "main": "script.js",
   "scripts": {
@@ -22,10 +25,12 @@
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "helmet": "^3.22.0",
     "jquery": "^3.4.1",
     "mongodb": "^3.5.5",
     "morgan": "^1.10.0",
@@ -48,7 +53,7 @@
     ],
     "delay": "2500",
     "env": {
-      "NODE_ENV": "development",
+      "NODE_ENV": "production",
       "PORT": 4000
     }
   }
