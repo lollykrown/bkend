@@ -28,7 +28,7 @@ const sessionOptions = {
         //secure: true,
         maxAge:60000
            },
-    store: new MongoStore({url: urll, dbName: 'Library'})
+    store: new MongoStore({url: urll})
 }
 
 app.use(compression());
