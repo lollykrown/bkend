@@ -10,6 +10,8 @@ const compression = require('compression');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo')(session);
 
+const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
+
 //let RedisStore = require('connect-redis')(session)
 //let RedisClient = redis.createClient()
 
@@ -26,7 +28,7 @@ const sessionOptions = {
         //secure: true,
         maxAge:60000
            },
-    store: new MongoStore(options)
+    store: new MongoStore({url: urll, dbName: 'Library'})
 }
 
 app.use(compression());
