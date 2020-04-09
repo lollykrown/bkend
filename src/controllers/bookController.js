@@ -3,7 +3,7 @@ const debug = require('debug')('app:bookController');
 const chalk = require('chalk');
 const booksRepo = require('../repos/booksRepo');
 
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'Library';
 
 function bookController(bookService, nav) {
@@ -12,6 +12,7 @@ function bookController(bookService, nav) {
             debug(`Time: ${chalk.yellowBright(Date(Date.now()).toString())}`);
             next();
         } else {
+            //res.send("Login first!");
             res.redirect('/');
         };
     };

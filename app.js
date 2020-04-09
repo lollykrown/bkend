@@ -15,13 +15,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 //const mongoDb= process.env.MONGODB_URI || url;
 
+const sessionOptions = {
+    saveUninitialized: true,
+    resave: false,
+    secret: 'library',
+    //cookie: {secure: true}
+}
+
 app.use(compression());
 app.use(helmet());
 app.use(morgan('tiny'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({secret: 'library'}));
+app.use(session(sessionOptions));
 
 require('./src/config/passport.js')(app);
 
@@ -31,10 +38,6 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views/index.html'));
-// })
 
 const nav = [{ link: '/books', title: 'Books' },]
 //{ link: '/search', title: 'Result' }];
@@ -54,7 +57,7 @@ app.get('/', (req, res) => {
         'signin',
         {
             nav: [{ link: '/books', title: 'Books' }],
-            //{ link: '/search', title: 'Results' }],
+            //{ link: '/admin', title: 'Add Books' }],
             title: 'Lollykrown'
         });
 });

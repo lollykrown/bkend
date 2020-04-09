@@ -1,7 +1,8 @@
 const { MongoClient, ObjectID } = require('mongodb');
-const interns = require('./books');
+const books = require('./books');
 const debug = require('debug')('app:booksRepo');
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
+
 const dbName = 'Library';
 
 function booksRepo() {
@@ -18,7 +19,7 @@ function booksRepo() {
           items = items.limit(limit);
         }
         resolve(await items.toArray());
-        client.close();
+        //client.close();
       } catch (error) {
         reject(error);
       }

@@ -21,11 +21,14 @@ module.exports = function localSsrategy() {
                     const col = await db.collection('users');
                     const user = await col.findOne({username});
 
-                    if(user.password === password) {
-                        done(null, user) 
-                    } else {
-                        done(null)
+                    if (!user) {
+                        return done(null, false, {message: `Invalid Username: ${username}`})
                     }
+                    if(user.password !== password) {
+                        return done(null, false, {message: 'Invalid Password'}) 
+                    } 
+                    return done(null, user);
+                    
                 } catch (err) {
                     debug(err.stack);
                 }

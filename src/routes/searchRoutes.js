@@ -7,7 +7,7 @@ const bookService = require('../services/goodreadsService');
 const { MongoClient, ObjectID } = require('mongodb');
 
 function router(nav) {
-    const {middleware, getById} = bookController(bookService, nav);
+    const {middleware} = bookController(bookService, nav);
     //searchRouter.use(middleware);
     searchRouter.route('/')
     .post((req, res) => {
