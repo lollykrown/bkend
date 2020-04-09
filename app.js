@@ -1,13 +1,16 @@
 const express = require('express');
-const RedisStore = require('connect-redis')(express);
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const redis = require('connect-redis')(express);
 const compression = require('compression');
 const helmet = require('helmet');
+
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient()
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,7 +25,7 @@ const sessionOptions = {
         secure: true,
         maxAge:60000
            },
-    store: new RedisStore(),
+    store: new RedisStore({ client: redisClient }),
 }
 
 app.use(compression());
