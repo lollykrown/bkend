@@ -1,5 +1,5 @@
 const express = require('express');
-const chalk = require('chalk');
+//const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
@@ -63,5 +63,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    debug(`listening on port ${chalk.yellow(port)}...`)
+    debug(`listening on port ${port}...`)
 });
