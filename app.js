@@ -8,6 +8,7 @@ const session = require('express-session');
 const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
+const MongoStore = require('connect-mongo')(session);
 
 //let RedisStore = require('connect-redis')(session)
 //let RedisClient = redis.createClient()
@@ -25,7 +26,7 @@ const sessionOptions = {
         //secure: true,
         maxAge:60000
            },
-    //store: new RedisStore({ client: RedisClient, ttl : 260 })
+    store: new MongoStore(options)
 }
 
 app.use(compression());
