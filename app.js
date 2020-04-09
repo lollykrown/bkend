@@ -26,11 +26,11 @@ const sessionOptions = {
     saveUninitialized: true,
     resave: false,
     secret: 'library',
-    cookie:{
-        secure: true,
-        maxAge:60000
-           },
-    store: new MongoStore({url: urll, ttl: 14 * 24 * 60 * 60})
+    // cookie:{
+    //     secure: true,
+    //     maxAge:60000
+    //        },
+    // store: new MongoStore({url: urll, ttl: 14 * 24 * 60 * 60})
 }
 
 app.use(compression());
