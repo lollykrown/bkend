@@ -8,13 +8,13 @@ const dbName = 'Library';
 
 function bookController(bookService, nav) {
     function middleware(req, res, next) {
-        if (req.user) {
-            debug(`Time: ${Date(Date.now()).toString()}`);
+        //if (req.user) {
+            //debug(`Time: ${Date(Date.now()).toString()}`);
             next();
-        } else {
+       // } else {
             //res.send("Login first!");
-            res.redirect('/');
-        };
+           // res.redirect('/');
+       // };
     };
     function getIndex(req, res) {
         (async function mongo() {
