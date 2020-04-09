@@ -1,5 +1,5 @@
 const express = require('express');
-//const chalk = require('chalk');
+const RedisStore = require('connect-redis')(express);
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
