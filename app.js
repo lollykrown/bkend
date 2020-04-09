@@ -5,13 +5,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const redis = require('redis');
+//const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo')(session);
 
-//const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
-const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test';
+const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
+//const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test';
 
 
 //let RedisStore = require('connect-redis')(session)
@@ -27,7 +27,7 @@ const sessionOptions = {
     resave: false,
     secret: 'library',
     cookie:{
-        //secure: true,
+        secure: true,
         maxAge:60000
            },
     store: new MongoStore({url: urll, ttl: 14 * 24 * 60 * 60})
