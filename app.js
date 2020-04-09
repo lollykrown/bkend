@@ -8,18 +8,21 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const compression = require('compression');
 const helmet = require('helmet');
-const url = 'mongodb://localhost:27017';
-//const mongoDb = 'mongodb+srv://lollykrown:password@cluster0-mbdj7.mongodb.net/local_library?retryWrites=true';
 
 const app = express();
 const port = process.env.PORT || 3000;
-//const mongoDb= process.env.MONGODB_URI || url;
+
+app.set('trust proxy', 1);
 
 const sessionOptions = {
     saveUninitialized: true,
     resave: false,
     secret: 'library',
-    //cookie: {secure: true}
+    cookie:{
+        secure: true,
+        maxAge:60000
+           },
+    store: new RedisStore(),
 }
 
 app.use(compression());
@@ -29,6 +32,13 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session(sessionOptions));
+
+app.use(function(req,res,next){
+    if(!req.session){
+        return next(new Error('Oh no')) //handle error
+    }
+    next() //otherwise continue
+    });
 
 require('./src/config/passport.js')(app);
 
