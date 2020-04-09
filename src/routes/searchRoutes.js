@@ -1,6 +1,6 @@
 const express = require('express');
 const searchRouter = express.Router();
-const chalk = require('chalk');
+// const chalk = require('chalk');
 const debug = require('debug')('app:searchRoutes');
 const bookController = require('../controllers/bookController');
 const bookService = require('../services/goodreadsService');
@@ -12,7 +12,7 @@ function router(nav) {
     searchRouter.route('/')
     .post((req, res) => {
         const {search} = req.body;
-        debug(chalk.red(search));
+        debug(search);
         (async function query() {
             try {
                 const bk = await bookService.getBookByTitle(search);

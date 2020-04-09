@@ -2,7 +2,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
-const chalk = require('chalk');
+//const chalk = require('chalk');
 
 const authRouter = express.Router();
 
@@ -38,7 +38,7 @@ function router(nav) {
         }());
     });
     authRouter.route('/signin').get((req, res) => {
-        debug(chalk.red(req.session));
+        debug(req.session);
         res.render('signin', {
                 nav,
                 title: 'Sign In',
