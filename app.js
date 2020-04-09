@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const redis = require('connect-redis')(express);
+const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
 
