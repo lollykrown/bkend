@@ -39,7 +39,7 @@ app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session(sessionOptions));
+//app.use(session(sessionOptions));
 
 // RedisClient.on('error', function(err) {
 //     console.log('Redis error: ' + err);
