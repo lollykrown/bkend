@@ -9,23 +9,23 @@ const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
 
-let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient()
+//let RedisStore = require('connect-redis')(session)
+//let RedisClient = redis.createClient()
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
-//app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
 const sessionOptions = {
     saveUninitialized: true,
     resave: false,
     secret: 'library',
     cookie:{
-        secure: true,
+        //secure: true,
         maxAge:60000
            },
-    store: new RedisStore({ client: redisClient }),
+    //store: new RedisStore({ client: RedisClient, ttl : 260 })
 }
 
 app.use(compression());
@@ -36,12 +36,20 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session(sessionOptions));
 
-app.use(function(req,res,next){
-    if(!req.session){
-        return next(new Error('Oh no')) //handle error
-    }
-    next() //otherwise continue
-    });
+// RedisClient.on('error', function(err) {
+//     console.log('Redis error: ' + err);
+// });
+
+// RedisClient.on("ready",function () {
+//     console.log("Redis is ready");
+// });
+
+// app.use(function(req,res,next){
+//     if(!req.session){
+//         return next(new Error('Oh no')) //handle error
+//     }
+//     next() //otherwise continue
+//     });
 
 require('./src/config/passport.js')(app);
 
