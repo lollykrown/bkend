@@ -5,14 +5,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-//const redis = require('redis');
+const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo')(session);
 
-const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
-//const urll = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test';
-
+const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
+const dbName = 'Library';
 
 //let RedisStore = require('connect-redis')(session)
 //let RedisClient = redis.createClient()
@@ -26,11 +25,13 @@ const sessionOptions = {
     saveUninitialized: true,
     resave: false,
     secret: 'library',
-    // cookie:{
-    //     secure: true,
-    //     maxAge:60000
-    //        },
-    // store: new MongoStore({url: urll, ttl: 14 * 24 * 60 * 60})
+    cookie:{
+        //secure: true,
+        // path: '/',
+        // httpOnly: false,
+        maxAge:60000
+           },
+    store: new MongoStore({url: url, database: dbNameh})
 }
 
 app.use(compression());
@@ -39,7 +40,7 @@ app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-//app.use(session(sessionOptions));
+app.use(session(sessionOptions));
 
 // RedisClient.on('error', function(err) {
 //     console.log('Redis error: ' + err);

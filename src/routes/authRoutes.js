@@ -2,7 +2,8 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
-//const chalk = require('chalk');
+const bcrypt = require('bcrypt');
+const chalk = require('chalk');
 
 const authRouter = express.Router();
 
@@ -21,13 +22,17 @@ function router(nav) {
         (async function addUser() {
             let client;
             try {
+                const saltRounds = 10;  
+                const hashedPassword = await bcrypt.hash(password, saltRounds);
+                debug(chalk.red(hashedPassword));
+
                 client = await MongoClient.connect(url, {useUnifiedTopology: true});
                 debug('Succsessfully connected to the server');
                 const db = client.db(dbName);
                 const col = await db.collection('users');
-                const user = {username, password};
+                const user = {username, hashedPassword};
                 const response = await col.insertOne(user);
-                debug(response);
+                //debug(response);
                 req.login(response.ops[0], () => {
                     res.redirect('/auth/signin');
                 });

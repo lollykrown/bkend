@@ -2,6 +2,9 @@ const passport = require('passport');
 const { Strategy } = require('passport-local');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:local.strategy');
+const bcrypt = require('bcrypt');
+const chalk = require('chalk');
+
 
 module.exports = function localSsrategy() {
     passport.use(new Strategy(
@@ -9,9 +12,8 @@ module.exports = function localSsrategy() {
             usernameField: 'username',
             passwordField: 'password'
         }, (username, password, done) => {
-            const url = 'mongodb://localhost:27017';
+            const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
             const dbName = 'Library';
-
             (async function mongo() {
                 let client;
                 try {
@@ -21,10 +23,13 @@ module.exports = function localSsrategy() {
                     const col = await db.collection('users');
                     const user = await col.findOne({username});
 
+                    const pwd = await bcrypt.compare(password, user.hashedPassword);
+                    debug(chalk.red(pwd));
+
                     if (!user) {
                         return done(null, false, {message: `Invalid Username: ${username}`})
                     }
-                    if(user.password !== password) {
+                    if(!pwd) {
                         return done(null, false, {message: 'Invalid Password'}) 
                     } 
                     return done(null, user);
@@ -32,7 +37,7 @@ module.exports = function localSsrategy() {
                 } catch (err) {
                     debug(err.stack);
                 }
-                client.close();
+                //client.close();
             }());
         }    ));
 };
