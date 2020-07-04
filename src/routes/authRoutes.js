@@ -63,8 +63,12 @@ function router(nav) {
 
     authRouter.get('/facebook', passport.authenticate('facebook'));
 
-    authRouter.get('/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/books',
+    authRouter.get('/facebook/callback', passport.authenticate('facebook', 
+    { successRedirect: '/books', failureRedirect: '/' }));
+
+    authRouter.get('/twitter', passport.authenticate('twitter'));
+    authRouter.get('/twitter/callback',
+      passport.authenticate('twitter', { successRedirect: '/books',
                                         failureRedirect: '/' }));
                                         
     authRouter.route('/profile').all((req, res, next) => {
