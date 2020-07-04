@@ -61,7 +61,7 @@ function router(nav) {
         res.redirect('/');
       });
 
-    authRouter.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
+    authRouter.get('/facebook', passport.authenticate('facebook'));
 
     authRouter.get('/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/books',
