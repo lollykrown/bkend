@@ -50,7 +50,10 @@ function router(nav) {
             });
         })
         .post(passport.authenticate('local', {
-            successRedirect: '/books'
+            successRedirect: '/books',
+            failureRedirect: '/',
+            // failureFlash: true
+            // failureFlash: 'Invalid username or password.'
     }));
     authRouter.route('/profile').all((req, res, next) => {
         if (req.user) {
