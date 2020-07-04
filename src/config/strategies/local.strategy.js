@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const chalk = require('chalk');
 
 
-module.exports = function localSsrategy() {
+module.exports = function localStrategy() {
     passport.use(new Strategy(
         {
             usernameField: 'username',
