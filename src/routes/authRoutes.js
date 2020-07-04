@@ -61,11 +61,11 @@ function router(nav) {
         res.redirect('/');
       });
 
-    authRouter.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+    authRouter.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
-    authRouter.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/',
-                                        failureRedirect: '/login' }));
+    authRouter.get('/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/books',
+                                        failureRedirect: '/' }));
                                         
     authRouter.route('/profile').all((req, res, next) => {
         if (req.user) {
