@@ -5,16 +5,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const redis = require('redis');
 const compression = require('compression');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo')(session);
 
 const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'Library';
-
-//let RedisStore = require('connect-redis')(session)
-//let RedisClient = redis.createClient()
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -42,21 +38,6 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session(sessionOptions));
-
-// RedisClient.on('error', function(err) {
-//     console.log('Redis error: ' + err);
-// });
-
-// RedisClient.on("ready",function () {
-//     console.log("Redis is ready");
-// });
-
-// app.use(function(req,res,next){
-//     if(!req.session){
-//         return next(new Error('Oh no')) //handle error
-//     }
-//     next() //otherwise continue
-//     });
 
 require('./src/config/passport.js')(app);
 
