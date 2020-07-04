@@ -12,6 +12,9 @@ const MongoStore = require('connect-mongo')(session);
 const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'Library';
 
+require('dotenv').config()
+
+
 const app = express();
 const port = process.env.PORT || 4000;
 

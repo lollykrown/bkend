@@ -55,6 +55,18 @@ function router(nav) {
             // failureFlash: true
             // failureFlash: 'Invalid username or password.'
     }));
+
+    authRouter.route('/logout').get((req, res)=> {
+        req.logout();
+        res.redirect('/');
+      });
+
+    authRouter.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+    authRouter.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/',
+                                        failureRedirect: '/login' }));
+                                        
     authRouter.route('/profile').all((req, res, next) => {
         if (req.user) {
           next();
