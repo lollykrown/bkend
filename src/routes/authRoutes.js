@@ -70,6 +70,15 @@ function router(nav) {
     authRouter.get('/twitter/callback',
       passport.authenticate('twitter', { successRedirect: '/books',
                                         failureRedirect: '/' }));
+
+    authRouter.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
+    authRouter.get('/google/callback', 
+      passport.authenticate('google', { failureRedirect: '/' }),
+      function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/books');
+      });
                                         
     authRouter.route('/profile').all((req, res, next) => {
         if (req.user) {

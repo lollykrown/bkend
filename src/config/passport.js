@@ -2,7 +2,8 @@ const passport = require('passport');
 require('./strategies/local.strategy')();
 require('./strategies/fb.strategy')();
 // require('./strategies/twitter.strategy')();
-
+// require('./strategies/google.strategy')();
+// require('./strategies/github.strategy')();
 
 module.exports = function passportConfig(app) {
     app.use(passport.initialize());
