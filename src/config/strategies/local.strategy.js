@@ -12,6 +12,7 @@ module.exports = function localSsrategy() {
             usernameField: 'username',
             passwordField: 'password'
         }, (username, password, done) => {
+            // const url = 'mongodb://localhost:27017/Library?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
             const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
             const dbName = 'Library';
             (async function mongo() {
@@ -37,7 +38,7 @@ module.exports = function localSsrategy() {
                 } catch (err) {
                     debug(err.stack);
                 }
-                //client.close();
+                client.close();
             }());
         }    ));
 };

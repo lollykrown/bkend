@@ -27,11 +27,12 @@ const sessionOptions = {
     secret: 'library',
     cookie:{
         //secure: true,
-        // path: '/',
-        // httpOnly: false,
+        path: '/',
+        httpOnly: true,
         maxAge:60000
            },
-    store: new MongoStore({url: url, database: dbName})
+    store: new MongoStore({url: url, database: dbName, ttl: 1*60}),
+    name: 'id'
 }
 
 app.use(compression());

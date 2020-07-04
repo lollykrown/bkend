@@ -15,8 +15,7 @@ function router(nav) {
                 } catch (err) {
                     debug(err.stack);
                 }
-            }());
-            
+            }());   
         });
     return adminRouter;
 }

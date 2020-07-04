@@ -10,6 +10,8 @@ function bookController(bookService, nav) {
     function middleware(req, res, next) {
         if (req.user) {
             debug(`Time: ${Date(Date.now()).toString()}`);
+            debug(req.user)
+            debug(req.cookies)
             next();
         } else {
             //res.send("Login first!");
