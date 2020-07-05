@@ -1,12 +1,14 @@
 const passport = require('passport');
-const GitHubStrategy = require('passport-github').Strategy;
-const debug = require('debug')('app:fb.strategy');
+const GitHubStrategy = require('passport-github2').Strategy;
+const { MongoClient } = require('mongodb');
+const debug = require('debug')('app:github.strategy');
 
 module.exports = function facebookStrategy() {
   passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:4000/auth/github/callback"
+    callbackURL: "http://127.0.0.1:4000/auth/github/callback",
+    profileFields: ['id', 'displayName', 'email']
   },
     function (accessToken, refreshToken, profile, done) {
       debug(process.env.GITHUB_CLIENT_ID)

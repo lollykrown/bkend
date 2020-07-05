@@ -79,6 +79,15 @@ function router(nav) {
         // Successful authentication, redirect home.
         res.redirect('/books');
       });
+
+      authRouter.get('/github', passport.authenticate('github'));
+
+      authRouter.get('/github/callback', 
+        passport.authenticate('github', { failureRedirect: '/' }),
+        function(req, res) {
+          // Successful authentication, redirect home.
+          res.redirect('/books');
+        });
                                         
     authRouter.route('/profile').all((req, res, next) => {
         if (req.user) {
