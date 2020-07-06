@@ -56,7 +56,19 @@ function router(nav) {
     //         // failureFlash: 'Invalid username or password.'
     // }));
     
- 
+    //custom callback
+      .post((req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+          if (err) { return next(err); }
+          if (!user) { return res.redirect('/login'); }
+          req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            debug(req.user)
+            debug(req.cookies)
+            return res.redirect('/books');
+          });
+        })(req, res, next);
+      });
 
     authRouter.route('/logout').get((req, res)=> {
         req.logout();
