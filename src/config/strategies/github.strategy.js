@@ -11,7 +11,6 @@ module.exports = function facebookStrategy() {
     profileFields: ['id', 'displayName', 'email']
   },
     function (accessToken, refreshToken, profile, done) {
-      debug(process.env.GITHUB_CLIENT_ID)
       const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
       const dbName = 'Library';
       (async function mongo() {

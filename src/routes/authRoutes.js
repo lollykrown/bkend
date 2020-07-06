@@ -49,12 +49,14 @@ function router(nav) {
                 title: 'Sign In',
             });
         })
-        .post(passport.authenticate('local', {
-            successRedirect: '/books',
-            failureRedirect: '/',
-            // failureFlash: true
-            // failureFlash: 'Invalid username or password.'
-    }));
+    //     .post(passport.authenticate('local', {
+    //         successRedirect: '/books',
+    //         failureRedirect: '/',
+    //         // failureFlash: true
+    //         // failureFlash: 'Invalid username or password.'
+    // }));
+    
+ 
 
     authRouter.route('/logout').get((req, res)=> {
         req.logout();
