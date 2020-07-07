@@ -26,6 +26,9 @@ function bookController(bookService, nav) {
                     'bookListView', {nav, title: 'Lollykrown', books });
             } catch (err) {
                 debug(err.stack);
+                res.status(500).json({
+                    message: 'Internal Server Error'
+                  });
             }
         }());
     };
