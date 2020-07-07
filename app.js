@@ -8,6 +8,8 @@ const session = require('express-session');
 const compression = require('compression');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo')(session);
+const flash = require('express-flash');
+
 
 const url = 'mongodb+srv://kay:ololade@notes-ptviz.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'Library';
@@ -41,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session(sessionOptions));
+app.use(flash());
 
 require('./src/config/passport.js')(app);
 
@@ -65,6 +68,9 @@ app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 
 app.get('/', (req, res) => {
+    req.flash('info', 'Welcome');
+    req.flash('info', 'Just testing');
+
     res.render(
         'signin',
         {
